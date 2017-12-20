@@ -39,12 +39,10 @@ def http_get_request(url, params, add_to_headers=None):
     if add_to_headers:
         headers.update(add_to_headers)
     postdata = urllib.parse.urlencode(params)
-    print("请求数据")
-    print(url + postdata)
+
     try:
         response = requests.get(url, postdata, headers=headers, timeout=5)
-        print("接受数据")
-        print(response)
+
         if response.status_code == 200:
             return response.json()
         else:
@@ -62,8 +60,7 @@ def http_post_request(url, params, add_to_headers=None):
     if add_to_headers:
         headers.update(add_to_headers)
     postdata = json.dumps(params)
-    print("请求数据")
-    print(url + postdata)
+
     try:
         response = requests.post(url, postdata, headers=headers, timeout=10)
         if response.status_code == 200:
@@ -87,7 +84,7 @@ def api_key_get(params, request_path):
     host_name = urllib.parse.urlparse(host_url).hostname
     host_name = host_name.lower()
     params['Signature'] = createSign(params, method, host_name, request_path, SECRET_KEY)
-    print('签名\n' + params['Signature'])
+
     url = host_url + request_path
     return http_get_request(url, params)
 
@@ -104,7 +101,6 @@ def api_key_post(params, request_path):
     host_name = urllib.parse.urlparse(host_url).hostname
     host_name = host_name.lower()
     params_to_sign['Signature'] = createSign(params_to_sign, method, host_name, request_path, SECRET_KEY)
-    print('签名post\n' + params_to_sign['Signature'])
     url = host_url + request_path + '?' + urllib.parse.urlencode(params_to_sign)
     return http_post_request(url, params)
 
@@ -116,8 +112,7 @@ def createSign(pParams, method, host_url, request_path, secret_key):
     payload = '\n'.join(payload)
     payload = payload.encode(encoding='UTF8')
     secret_key = secret_key.encode(encoding='UTF8')
-    print("签名数据")
-    print(payload)
+
     digest = hmac.new(secret_key, payload, digestmod=hashlib.sha256).digest()
     signature = base64.b64encode(digest)
     signature = signature.decode()
