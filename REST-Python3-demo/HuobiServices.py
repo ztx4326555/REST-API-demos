@@ -13,63 +13,66 @@ Market data API
 
 
 # 获取KLine
-def get_kline(symbol, period, long_polling=None):
+def get_kline(symbol, period, size=150):
     """
-    :param symbol: 可选值：{ ethcny }
+    :param symbol
     :param period: 可选值：{1min, 5min, 15min, 30min, 60min, 1day, 1mon, 1week, 1year }
-    :param long_polling: 可选值： { true, false }
+    :param size: 可选值： [1,2000]
     :return:
     """
     params = {'symbol': symbol,
               'period': period}
 
-    if long_polling:
-        params['long-polling'] = long_polling
     url = MARKET_URL + '/market/kline'
     return http_get_request(url, params)
 
 
 # 获取marketdepth
-def get_depth(symbol, type, long_polling=None):
+def get_depth(symbol, type):
     """
-    :param symbol: 可选值：{ ethcny }
+    :param symbol
     :param type: 可选值：{ percent10, step0, step1, step2, step3, step4, step5 }
-    :param long_polling: 可选值： { true, false }
     :return:
     """
     params = {'symbol': symbol,
               'type': type}
-
-    if long_polling:
-        params['long-polling'] = long_polling
+    
     url = MARKET_URL + '/market/depth'
     return http_get_request(url, params)
 
 
 # 获取tradedetail
-def get_trade(symbol, long_polling=None):
+def get_trade(symbol):
     """
-    :param symbol: 可选值：{ ethcny }
-    :param long_polling: 可选值： { true, false }
+    :param symbol
     :return:
     """
     params = {'symbol': symbol}
-    if long_polling:
-        params['long-polling'] = long_polling
+
     url = MARKET_URL + '/market/trade'
     return http_get_request(url, params)
 
 
-# 获取 Market Detail 24小时成交量数据
-def get_detail(symbol, long_polling=None):
+# 获取merge ticker
+def get_ticker(symbol):
     """
-    :param symbol: 可选值：{ ethcny }
-    :param long_polling: 可选值： { true, false }
+    :param symbol: 
     :return:
     """
     params = {'symbol': symbol}
-    if long_polling:
-        params['long-polling'] = long_polling
+
+    url = MARKET_URL + '/market/detail/merged'
+    return http_get_request(url, params)
+
+
+# 获取 Market Detail 24小时成交量数据
+def get_detail(symbol):
+    """
+    :param symbol
+    :return:
+    """
+    params = {'symbol': symbol}
+
     url = MARKET_URL + '/market/detail'
     return http_get_request(url, params)
 
