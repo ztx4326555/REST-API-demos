@@ -348,7 +348,7 @@ QString HuoBiProApi::market() const
 
 QUrl HuoBiProApi::host() const
 {
-    static QUrl hostUrl("https://be.huobi.com");
+    static QUrl hostUrl("https://api.huobi.pro");
     return hostUrl;
 }
 
