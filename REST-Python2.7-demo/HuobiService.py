@@ -111,47 +111,6 @@ def get_balance(acct_id=None):
     return api_key_get(params, url)
 
 
-# 下单
-def orders(amount, source, symbol, _type, price=0):
-    """
-
-    :param amount: 
-    :param source: 
-    :param symbol: 
-    :param _type: 可选值 {buy-market：市价买, sell-market：市价卖, buy-limit：限价买, sell-limit：限价卖}
-    :param price: 
-    :return: 
-    """
-    try:
-        accounts = get_accounts()
-        acct_id = accounts['data'][0]['id']
-    except BaseException as e:
-        print 'get acct_id error.%s' % e
-        acct_id = ACCOUNT_ID
-
-    params = {"account-id": acct_id,
-              "amount": amount,
-              "symbol": symbol,
-              "type": _type,
-              "source": source}
-    if price:
-        params["price"] = price
-
-    url = "/v1/order/orders"
-    return api_key_post(params, url)
-
-
-# 执行订单
-def place_order(order_id):
-    """
-
-    :param order_id: 
-    :return: 
-    """
-    params = {}
-    url = "/v1/order/orders/{0}/place".format(order_id)
-    return api_key_post(params, url)
-
 # 创建并执行订单
 
 
