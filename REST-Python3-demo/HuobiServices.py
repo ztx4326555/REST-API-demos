@@ -21,9 +21,10 @@ def get_kline(symbol, period, size=150):
     :return:
     """
     params = {'symbol': symbol,
-              'period': period}
+              'period': period,
+              'size': size}
 
-    url = MARKET_URL + '/market/kline'
+    url = MARKET_URL + '/market/history/kline'
     return http_get_request(url, params)
 
 
