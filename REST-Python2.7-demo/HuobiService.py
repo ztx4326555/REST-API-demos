@@ -354,7 +354,7 @@ def get_margin(symbol, currency, amount):
     params = {"symbol": symbol,
               "currency": currency,
               "amount": amount}
-    url = " /v1/margin/orders"
+    url = "/v1/margin/orders"
     return api_key_post(params, url)
 
 # 归还借贷
