@@ -408,17 +408,16 @@ def loan_orders(symbol, currency, start_date="", end_date="", start="", direct="
 
 
 # 借贷账户详情,支持查询单个币种
-def margin_balance(symbol=""):
+def margin_balance(symbol):
     """
     :param symbol: 
     :return: 
     """
-    if symbol:
-        url = "/v1/margin/accounts/balance?symbol={0}".format(symbol)
-    else:
-        url = "/v1/margin/accounts/balance"
     params = {}
-
+    url = "/v1/margin/accounts/balance"
+    if symbol:
+        params['symbol'] = symbol
+    
     return api_key_get(params, url)
 
 
