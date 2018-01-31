@@ -17,14 +17,22 @@ import requests
 
 # 此处填写APIKEY
 
-ACCESS_KEY = " "
-SECRET_KEY = " "
+ACCESS_KEY = "07e2b31a-7bfe61a2-118558ab-35701"
+SECRET_KEY = "6f29aeb2-f290866a-df3684be-a6d26"
 
 
 
-# API 请求地址
+# API 请求地址  
 MARKET_URL = "https://api.huobi.pro"
 TRADE_URL = "https://api.huobi.pro"
+request_path = "/v1/order/orders"
+
+timestamp = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S')
+params= {'AccessKeyId': ACCESS_KEY,
+                   'SignatureMethod': 'HmacSHA256',
+                   'SignatureVersion': '2',
+                   'Timestamp': timestamp}
+
 
 # 首次运行可通过get_accounts()获取acct_id,然后直接赋值,减少重复获取。
 ACCOUNT_ID = None
